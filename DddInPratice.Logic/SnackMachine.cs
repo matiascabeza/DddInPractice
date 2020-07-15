@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DddInPratice.Logic
 {
-    public sealed class SnackMachine
+    public sealed class SnackMachine : Entity
     {
         public Money MoneyInside { get; private set; }
         public Money MoneyTransaction { get; private set; }
