@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DddInPratice.Logic
 {
-    public sealed class Money
+    public sealed class Money :ValueObject<Money>
     {
         public int OneCentCount { get; private set; }
         public int TenCentCount { get; private set; }
@@ -17,6 +17,18 @@ namespace DddInPratice.Logic
 
         public Money(int oneCentCount, int tenCentCount, int quarterCount, int oneDollarCount, int fiveDollarCount, int twentyDollarCount)
         {
+            if (oneCentCount < 0)
+                throw new InvalidOperationException();
+            if (tenCentCount < 0)
+                throw new InvalidOperationException();
+            if (quarterCount < 0)
+                throw new InvalidOperationException();
+            if (oneDollarCount < 0)
+                throw new InvalidOperationException();
+            if (fiveDollarCount < 0)
+                throw new InvalidOperationException();
+            if (twentyDollarCount < 0)
+                throw new InvalidOperationException();
             OneCentCount = oneCentCount;
             TenCentCount = tenCentCount;
             QuarterCount = quarterCount;
@@ -38,6 +50,28 @@ namespace DddInPratice.Logic
             return sum;
         }
 
+        protected override bool EqualsCore(Money other)
+        {
+            return OneCentCount == other.OneCentCount &&
+                 TenCentCount == other.TenCentCount &&
+                 QuarterCount == other.QuarterCount &&
+                 OneDollarCount == other.OneDollarCount &&
+                 FiveDollarCount == other.FiveDollarCount &&
+                 TwentyDollarCount == other.TwentyDollarCount;
+        }
 
+        protected override int GetHashCodeCode()
+        {
+            unchecked
+            {
+                int hashCode = OneCentCount;
+                hashCode = (hashCode * 397) ^ TenCentCount;
+                hashCode = (hashCode * 397) ^ QuarterCount;
+                hashCode = (hashCode * 397) ^ OneDollarCount;
+                hashCode = (hashCode * 397) ^ FiveDollarCount;
+                hashCode = (hashCode * 397) ^ TwentyDollarCount;
+                return hashCode;
+            }
+        }
     }
 }
