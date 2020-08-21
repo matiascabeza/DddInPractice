@@ -52,7 +52,8 @@ namespace DddInPraticeUnitTest
         [DataRow(0,0,0,-4,0,0)]
         [DataRow(0,0,0,0,-5,0)]
         [DataRow(0,0,0,0,0,-6)]
-        public void Cannot_create_money_with_negative_value(int oneCentCount,
+        public void Cannot_create_money_with_negative_value(
+            int oneCentCount,
             int tenCentCount,
             int quarterCount,
             int oneDollarCount,
@@ -73,8 +74,65 @@ namespace DddInPraticeUnitTest
             {
                 Assert.AreEqual(ex, nameof(InvalidOperationException));
             }
+        }
 
-            
+        [TestMethod]
+        [DataRow(0, 0, 0, 0, 0, 0, 0)]
+        [DataRow(1, 0, 0, 0, 0, 0, 0.01)]
+        [DataRow(1, 2, 0, 0, 0, 0, 0.21)]
+        [DataRow(1, 2, 3, 0, 0, 0, 0.96)]
+        [DataRow(1, 2, 3, 4, 0, 0, 4.96)]
+        [DataRow(1, 2, 3, 4, 5, 0, 29.96)]
+        [DataRow(1, 2, 3, 4, 5, 6, 149.96)]
+        [DataRow(11, 0, 0, 0, 0, 0, 0.11)]
+        [DataRow(110, 0, 0, 0, 100, 0, 501.1)]
+        public void Amount_is_calculated_correctly(
+            int oneCentCount,
+            int tenCentCount,
+            int quarterCount,
+            int oneDollarCount,
+            int fiveDollarCount,
+            int twentyDollarCount,
+            double expectedAmount)
+        {
+            Money money = new Money(
+                  oneCentCount,
+                  tenCentCount,
+                  quarterCount,
+                  oneDollarCount,
+                  fiveDollarCount,
+                  twentyDollarCount);
+
+            Assert.AreEqual(money.Amount, decimal.Parse(expectedAmount.ToString()));
+        }
+
+       
+        [TestMethod]
+        public void Substraction_of_two_moneys_produces_correct_result()
+        {
+            Money money1 = new Money(10, 10, 10, 10, 10, 10);
+            Money money2 = new Money(1, 2, 3, 4, 5, 6);
+
+            Money result = money1 - money2;
+            Assert.AreEqual(result.OneCentCount,9);
+            Assert.AreEqual(result.TenCentCount, 8);
+            Assert.AreEqual(result.QuarterCount, 7);
+            Assert.AreEqual(result.OneDollarCount, 6);
+            Assert.AreEqual(result.FiveDollarCount, 5);
+            Assert.AreEqual(result.TwentyDollarCount, 4);
+
+        }
+
+        [TestMethod]
+
+        public void Cannot_subtract_more_than_exists()
+        {
+            Money money1 = new Money(0, 1, 0, 0, 0, 0);
+            Money money2 = new Money(1, 0, 0, 0, 0, 0);
+
+            Action action = () => { Money money = money1 - money2; };
+
+            Assert.ThrowsException<InvalidOperationException>(action);
 
         }
     }
