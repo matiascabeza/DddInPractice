@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DddInPratice.Logic", "DddIn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DddInPraticeUnitTest", "DddInPraticeUnitTest\DddInPraticeUnitTest.csproj", "{6E951A74-EBDB-493A-95BC-F65C9D8AF9B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DddInPractice.UI", "DddInPractice.UI\DddInPractice.UI.csproj", "{4D7A47FA-F85B-42F6-BE4F-7379D8F8D165}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6E951A74-EBDB-493A-95BC-F65C9D8AF9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E951A74-EBDB-493A-95BC-F65C9D8AF9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E951A74-EBDB-493A-95BC-F65C9D8AF9B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D7A47FA-F85B-42F6-BE4F-7379D8F8D165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D7A47FA-F85B-42F6-BE4F-7379D8F8D165}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D7A47FA-F85B-42F6-BE4F-7379D8F8D165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D7A47FA-F85B-42F6-BE4F-7379D8F8D165}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
